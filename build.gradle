@@ -1,6 +1,6 @@
 buildscript {
 
-    ext { // 전역변수 설정
+    ext {
         springBootVersion = '2.1.7.RELEASE'
     }
     repositories(){ //
@@ -8,32 +8,29 @@ buildscript {
         jcenter()
     }
     dependencies {
-        // 의존성 주입
-
-        // spring-boot-gradle-plugin 의 2.1.7.RELEASE 를 의존성으로 받겠다.
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
 
-// 위에서 선언한 플러그인 의존성들을 적용할 것인지 결정
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
-
-// spring boot의 의존성들을 관리해주는 플러그인! 꼭 추가해야한다.
 apply plugin: 'io.spring.dependency-management'
 
-group 'com.book'
+group 'com.jojoldu.book'
 version '1.0-SNAPSHOT'
-sourceCompatibility = '1.6'
+sourceCompatibility = 1.8
 
-// 각종 의존성들을 어떤 원격 저장소에서 받을지 정한다.
 repositories{
     mavenCentral()
 }
 
-// 프로젝트 개발에 필요한 의존성들을 선언하는 곳
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web')
-    testImplementation('org.springframework.boot:spring-boot-stater-test')
+    implementation('org.projectlombok:lombok')
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa') //스프링 부트용 Spring Data JPA 추상화 라이브러리
+    implementation('com.h2database:h2')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('org.projectlombok:lombok')
+
 }
